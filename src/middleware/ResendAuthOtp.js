@@ -1,4 +1,5 @@
-const User = require("../models/User")
+const User = require("../models/User");
+const sendOtpThroughEmail  = require("../services/ResendOtpEmail");
 const ResendOTP = async (req, res) => {
     try {
         const { email } = req.body
@@ -14,6 +15,8 @@ const ResendOTP = async (req, res) => {
             await user.save();
             console.log("New OTP deleted after 4 minutes.");
         }, 240000);
+        const receipientEmail = email
+        sendOtpThroughEmail(receipientEmail, newOtp)
         res.status(200).json({ message: "OTP resent successfully kindly check your mail", user });
     } catch (error) {
         res.status(500).json({ message: "Error resending OTP", error });

@@ -1,12 +1,12 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const generateOTP  = require("./OtpCodeGenerator")
+const generateOTP = require("./OtpCodeGenerator")
+const sendEmail = require("../services/SendEmail")
+const Token = require("../services/Jwt");
 const Signup = async (req, res) => {
-    // otp
     const len = 4
     const otp = generateOTP(len)
     console.log(otp)
-    // generate otp before user csn signaIn //
     try {
         const { email, password } = req.body;
         if (!email && !password) {
@@ -21,10 +21,14 @@ const Signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ email, password: hashedPassword, otp });
         await newUser.save()
-        res.status(201).json({
-            message: "Details user created successfully creates",
-            user: newUser,
-        });
+
+
+        const receiverEmail = email;
+     
+        sendEmail(receiverEmail, otp)
+
+        Token(newUser, res)
+
     } catch (error) {
         res.status(500).json({ message: "Error creating user", error: error });
     }

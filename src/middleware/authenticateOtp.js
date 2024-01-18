@@ -6,7 +6,7 @@ const Verify = async (req, res) => {
         if (!user) {
             return res.status(400).json({ message: "INVALID OTP" });
         }
-        // change isverified to true when i input the otp
+   
         user.isverified = true
         await user.save()
         res.status(200).json({ message: "User Verified" });
