@@ -1,18 +1,19 @@
+const { errorResMsg, successResMsg } = require("../library/ErrorHandler")
 const User = require("../models/User")
 const Verify = async (req, res) => {
     try {
         const { otp } = req.body
-        const user = await User.findOne({otp})
+        const user = await User.findOne({ otp })
         if (!user) {
-            return res.status(400).json({ message: "INVALID OTP" });
+            return errorResMsg(res, 400, "INVALID OTP")
         }
-   
+
         user.isverified = true
         await user.save()
-        res.status(200).json({ message: "User Verified" });
+        successResMsg(res, 200, { message: "User Verified", user })
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal Server Error" });
+        errorResMsg(res,500,"Internal Server Error")
     }
 
 }

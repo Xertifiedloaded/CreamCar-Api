@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const generateOTP = require("./OtpCodeGenerator")
 const sendEmail = require("../services/SendEmail")
 const Token = require("../services/Jwt");
+const { errorResMsg } = require("../library/ErrorHandler");
 const Signup = async (req, res) => {
     const len = 4
     const otp = generateOTP(len)
@@ -10,27 +11,23 @@ const Signup = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email && !password) {
-            return res
-                .status(400)
-                .json({ message: "Please input username, password and email" });
+            return errorResMsg(res, 500, "Please input username, password and email")
         }
         const ExistingUser = await User.findOne({ email });
         if (ExistingUser) {
-            return res.status(400).json({ message: "user already exist" });
+            return errorResMsg(res, 400, "user already exist")
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ email, password: hashedPassword, otp });
         await newUser.save()
-
-
         const receiverEmail = email;
-     
+
         sendEmail(receiverEmail, otp)
 
         Token(newUser, res)
 
     } catch (error) {
-        res.status(500).json({ message: "Error creating user", error: error });
+        return errorResMsg(res, 500, "Error creating user")
     }
 };
 

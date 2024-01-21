@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 const process = require('process');
 
-// Function to send email
 const sendEmail = (receiverEmail, otp) => {
     const senderEmail = process.env.SENDER_EMAIL;
     const smtpConfig = {

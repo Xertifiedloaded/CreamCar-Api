@@ -9,7 +9,6 @@ PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(bodyParser.json())
 app.use('/api/user/v1', userRouter)

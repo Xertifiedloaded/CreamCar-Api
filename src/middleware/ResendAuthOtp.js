@@ -1,5 +1,6 @@
+const { successResMsg, errorResMsg } = require("../library/ErrorHandler");
 const User = require("../models/User");
-const sendOtpThroughEmail  = require("../services/ResendOtpEmail");
+const sendOtpThroughEmail = require("../services/ResendOtpEmail");
 const ResendOTP = async (req, res) => {
     try {
         const { email } = req.body
@@ -13,13 +14,13 @@ const ResendOTP = async (req, res) => {
         setTimeout(async () => {
             user.otp = undefined;
             await user.save();
-            console.log("New OTP deleted after 4 minutes.");
+            console.log("New OTP  will be deleted after 4 minutes.");
         }, 240000);
         const receipientEmail = email
         sendOtpThroughEmail(receipientEmail, newOtp)
-        res.status(200).json({ message: "OTP resent successfully kindly check your mail", user });
+        successResMsg(res, 200, { message: "Error resending OTP", error })
     } catch (error) {
-        res.status(500).json({ message: "Error resending OTP", error });
+        errorResMsg(res, 500, "Error resending OTP")
     }
 }
 module.exports = ResendOTP
