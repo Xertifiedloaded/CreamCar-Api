@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     otp: String,
     resetToken: String,
-    ProfilePicture: String,
+    profilePic: String,
     resetTokenExpiry: String,
     isverified: String
 })
