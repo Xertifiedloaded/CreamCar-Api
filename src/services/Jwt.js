@@ -1,4 +1,4 @@
-// Import necessary modules
+
 const jwt = require('jsonwebtoken');
 
 const Token = (newUser, res) => {

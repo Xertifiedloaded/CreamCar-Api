@@ -2,8 +2,10 @@ const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDB = require("./src/config/db");
+const bodyParser = require("body-parser");
 const userRouter = require("./src/routes/app.routes")
-const bodyParser=require("body-parser")
+const AdminRouter = require("./src/routes/admin.routes")
+const PostCarRouter = require("./src/routes/car.router")
 dotenv.config();
 PORT = process.env.PORT || 3000;
 
@@ -12,10 +14,9 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(bodyParser.json())
 app.use('/api/user/v1', userRouter)
-
+app.use('/api/admin/v1', AdminRouter)
+app.use('/api/post/v1', PostCarRouter)
 connectDB();
-
-// console.log(bodyParser)
 app.get("/", (req, res) => {
   res.send("This is our application Home Page!!!!😁😁😁");
 });

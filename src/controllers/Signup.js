@@ -14,21 +14,17 @@ const Signup = async (req, res) => {
             return errorResMsg(res, 500, "Please input username, password and email")
         }
         const ExistingUser = await User.findOne({ email });
-        if (ExistingUser) {
+        if (ExistingUser){
             return errorResMsg(res, 400, "user already exist")
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ email, password: hashedPassword, otp });
         await newUser.save()
         const receiverEmail = email;
-
         sendEmail(receiverEmail, otp)
-
         Token(newUser, res)
-
     } catch (error) {
         return errorResMsg(res, 500, "Error creating user")
     }
 };
-
 module.exports = Signup

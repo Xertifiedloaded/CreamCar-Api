@@ -14,9 +14,10 @@ router.post("/signup", Signup)
 router.post("/login", Login)
 router.post("/confirm-otp", Verify)
 router.post("/resend-otp", ResendOTP)
-router.post('/profilepic/:id',upload.single('profilePic'), UploadUserProfilePicture);
+router.post('/profilepic/:id', upload.single('profilePic'), UploadUserProfilePicture);
 router.post("'/resetPassword/:token'", ResetPassword)
 router.post("/forget-password", ForgetPassword)
+
 
 
 
