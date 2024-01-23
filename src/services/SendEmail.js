@@ -19,7 +19,7 @@ const sendEmail = (receiverEmail, otp) => {
         to: receiverEmail,
         subject: "Activate Your Account",
         text: ` Hi there, Thank you for signing up for cream-car ,
-        kindly copy the Code beelow to verify your email ${otp} 
+        kindly copy the Code below to verify your email ${otp} 
         The link will expire in the next 2 minutes. if you did not sign 
         up for a cream-car account you can safely ignore the mail `,
     };

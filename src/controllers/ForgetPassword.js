@@ -20,8 +20,6 @@ const ForgetPassword = async (req, res) => {
         return successResMsg(res, 200, { message: "Reset link successfully", user })
     } catch (error) {
         errorResMsg(res, 500, "Error Sending Reset Link")
-
-
     }
 }
 module.exports = ForgetPassword

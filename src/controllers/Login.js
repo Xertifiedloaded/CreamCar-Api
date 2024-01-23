@@ -1,6 +1,6 @@
 const { errorResMsg, successResMsg } = require("../library/ErrorHandler")
 const userSchema = require("../models/User")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const Login = async (req, res) => {
     try {
         const { email, password } = req.body

@@ -9,6 +9,7 @@ const UploadUserProfilePicture = require("../controllers/UploadUserPic")
 const upload = require("../image/Multer")
 const router = express.Router()
 
+
 router.post("/signup", Signup)
 router.post("/login", Login)
 router.post("/confirm-otp", Verify)

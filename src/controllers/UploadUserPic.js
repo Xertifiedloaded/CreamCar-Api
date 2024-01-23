@@ -1,6 +1,7 @@
 const { errorResMsg, successResMsg } = require("../library/ErrorHandler");
-const Cloudinary = require("cloudinary");
+const Cloudinary = require("../image/Cloudinary");
 const User = require("../models/User");
+const path = require('path')
 
 const UploadUserProfilePicture = async (req, res) => {
     try {
@@ -12,7 +13,7 @@ const UploadUserProfilePicture = async (req, res) => {
         const updateUser = await User.findByIdAndUpdate(
             {
                 _id: req.params.id
-            },
+            },  
             {
                 profilePic: result.secure_url
             },
