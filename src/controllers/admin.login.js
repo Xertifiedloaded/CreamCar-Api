@@ -1,5 +1,5 @@
 
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const Admin = require("../models/admin.models");
 const { errorResMsg, successResMsg } = require("../library/ErrorHandler");
 exports.AdminLogin = async (req, res) => {
