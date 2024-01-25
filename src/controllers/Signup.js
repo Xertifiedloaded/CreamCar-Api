@@ -23,6 +23,7 @@ const Signup = async (req, res) => {
         const receiverEmail = email;
         sendEmail(receiverEmail, otp)
         Token(newUser, res)
+        
     } catch (error) {
         return errorResMsg(res, 500, "Error creating user")
     }

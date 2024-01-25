@@ -9,6 +9,7 @@ const Token = (newUser, res) => {
         process.env.SECRETKEY,
         { expiresIn: "10h" }
     );
+
     res.status(201).json({
         message: "Details user created successfully creates",
         user: newUser,

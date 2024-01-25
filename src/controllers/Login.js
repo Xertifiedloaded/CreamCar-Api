@@ -15,6 +15,7 @@ const Login = async (req, res) => {
         if (!isMatch) {
             return errorResMsg(res, 400, "Your email or password does not match")
         }
+        
         return successResMsg(res, 200, { message: "Login successful", user })
     } catch (error) {
         console.log(error.message);

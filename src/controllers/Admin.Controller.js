@@ -14,12 +14,18 @@ exports.AdminSignUp = async (req, res) => {
         }
         const HashedPassword = await bcrypt.hash(password, 10)
         const newAdmin = new Admin({ password: HashedPassword, email })
-        newAdmin.save()
-        // generate token that will identify each user
-        const token = jwt.sign({ userId: newAdmin._id }, process.env.SECRETKEY, {
-            expiresIn: "10h",
+        // generate token to identify each user
+        const token = jwt.sign({
+            userId: newAdmin._id,
+            role: newAdmin.role
+        }, process.env.SECRETKEY, {
+            expiresIn: "7d",
         });
-        return successResMsg(res, 201, { message: "Admin Registered successfully ", token });
+        // store the token to database
+        newAdmin.token = token;
+        newAdmin.save()
+
+        return successResMsg(res, 201, { message: "Admin Registered successfully ", newAdmin: newAdmin, token: token });
     } catch (error) {
         errorResMsg(res, 500, "Could not save admin")
     }

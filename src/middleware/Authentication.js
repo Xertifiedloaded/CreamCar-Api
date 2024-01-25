@@ -10,8 +10,10 @@ const isAuthenticated = (req, res, next) => {
         if (!decoded)
             return errorResMsg(res, 401, "Authentication failed")
         next();
-    } catch (error) {
-        return errorResMsg(res,401,"Authentication failed")
+    } 
+    catch (error) {
+        console.error(error);
+        return errorResMsg(res, 401, "Authentication failed")
     }
 };
 

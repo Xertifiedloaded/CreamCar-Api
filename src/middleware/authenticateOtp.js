@@ -13,7 +13,7 @@ const Verify = async (req, res) => {
         successResMsg(res, 200, { message: "User Verified", user })
     } catch (error) {
         console.error(error);
-        errorResMsg(res,500,"Internal Server Error")
+        errorResMsg(res, 500, "Internal Server Error")
     }
 
 }
