@@ -9,6 +9,6 @@ const { adminAuth } = require("../middleware/confirmUser")
 const router = express.Router()
 router.post("/signup", AdminSignUp)
 router.post("/login", AdminLogin)
-router.post('/post',adminAuth, car);
+router.post('/post', car);
 
 module.exports = router

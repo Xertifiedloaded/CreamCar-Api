@@ -1,15 +1,14 @@
 const { errorResMsg, successResMsg } = require("../library/ErrorHandler");
 const PostCar = require("../models/cars.model");
 const cloudinary = require("../image/Cloudinary");
-const { adminAuth } = require("../middleware/confirmUser");
 
 const car = async (req, res) => {
     try {
-        const { userId } = req.decoded;
-        const user = await PostCar.findById(userId);
-        if ( user.role !== "admin") {
-            return errorResMsg(res, 401, "You are UnAuthorized");
-        }
+        // const { userId } = req.decoded;
+        // const user = await PostCar.findById(userId);
+        // if ( user.role !== "admin") {
+        //     return errorResMsg(res, 401, "You are UnAuthorized");
+        // }
         const { title, content, timeStamp, role } = req.body;
         const CarPost = new PostCar({
             title,
