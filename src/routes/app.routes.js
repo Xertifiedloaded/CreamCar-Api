@@ -7,9 +7,10 @@ const ForgetPassword = require("../controllers/ForgetPassword")
 const ResetPassword = require("../controllers/ResetPassword")
 const UploadUserProfilePicture = require("../controllers/UploadUserPic")
 const upload = require("../image/Multer")
+const { getAllCars } = require("../controllers/getPost")
 const router = express.Router()
 
-
+router.get('/allcars', getAllCars)
 router.post("/signup", Signup)
 router.post("/login", Login)
 router.post("/confirm-otp", Verify)

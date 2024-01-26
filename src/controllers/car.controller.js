@@ -1,23 +1,25 @@
 const { errorResMsg, successResMsg } = require("../library/ErrorHandler");
-const PostCar = require("../models/cars.model");
 const cloudinary = require("../image/Cloudinary");
+const Car = require("../models/cars.model");
+const Admin = require("../models/admin.models");
 
 const car = async (req, res) => {
     try {
-        // const { userId } = req.decoded;
-        // const user = await PostCar.findById(userId);
-        // if ( user.role !== "admin") {
-        //     return errorResMsg(res, 401, "You are UnAuthorized");
-        // }
-        const { title, content, timeStamp, role } = req.body;
-        const CarPost = new PostCar({
+        console.log(req.decoded);
+        const { userId } = req.decoded;
+        const admin = await Admin.findById(userId);
+        if ( !admin) {
+            return errorResMsg(res, 401, "You are UnAuthorized");
+        }
+        const { title, content } = req.body;
+        console.log(req.body);
+        const carPost = new Car({
             title,
             content,
-            timeStamp,
-            role
+            admin: admin._id,
         });
-        await CarPost.save();
-        return successResMsg(res, 201, { message: "created Successfully", PostCar });
+        await carPost.save();
+        return successResMsg(res, 201, { message: "created Successfully", carPost });
     } catch (error) {
         console.log(error);
         errorResMsg(res, 500, "Post not created");
