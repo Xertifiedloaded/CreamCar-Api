@@ -12,8 +12,9 @@ const { getAllAccount, authenticateToken } = require("../controllers/getadmin")
 const router = express.Router()
 router.post("/signup", AdminSignUp)
 router.post("/login", AdminLogin)
-router.post('/post',isAuthenticated, car);
+router.post('/post',isAuthenticated,upload.single('image'), car);
 router.get('/allpost', getPost);
 router.get('/accounts',authenticateToken, getAllAccount);
 
 module.exports = router 
+upload.single('profilePic')
