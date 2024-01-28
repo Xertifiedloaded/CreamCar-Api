@@ -11,12 +11,14 @@ const car = async (req, res) => {
         if (!admin) {
             return errorResMsg(res, 401, "You are UnAuthorized");
         }
-        const { title, content, } = req.body;
+        const { title, content,paragraph,headline } = req.body;
         console.log(req.body);
         const result = await cloudinary.v2.uploader.upload(req.file.path);
         const carPost = new Car({
             title,
             content,
+            paragraph,
+            headline,
             admin: admin._id, // set admin id that uploaded the news
             image: result.secure_url,
 
