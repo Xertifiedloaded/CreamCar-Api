@@ -4,9 +4,9 @@ var cors = require('cors')
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDB = require("./src/config/db");
-// const bodyParser = require("body-parser");
 const userRouter = require("./src/routes/app.routes")
 const AdminRouter = require("./src/routes/admin.routes")
+const postRouter = require("./src/routes/user.routes")
 
 dotenv.config();
 PORT = process.env.PORT || 3000;
@@ -18,6 +18,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/user/v1', userRouter)
 app.use('/api/admin/v1', AdminRouter)
+app.use('/api/category/v1', postRouter)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100, 
