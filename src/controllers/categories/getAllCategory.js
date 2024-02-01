@@ -9,3 +9,4 @@ const getAllCategory = async (req, res) => {
     }
 }
 module.exports = getAllCategory
+
